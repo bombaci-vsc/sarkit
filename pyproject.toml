@@ -1,12 +1,8 @@
 [project]
-name = "sarkit"
-description = "Suite of SAR-related tools in Python."
-authors = [
-    {name = "Valkyrie Systems Corporation", email = "info@govsco.com"},
-]
+name = "pdm_sqlite_debug"
 requires-python = ">=3.11"
-readme = "README.md"
 license = {text = "MIT"}
+version = "0.0.1"
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Science/Research",
@@ -19,96 +15,29 @@ classifiers = [
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
 ]
-dynamic = ["version"]
 
 dependencies = [
     "jbpy>=0.5.1, <0.6",
     "lxml>=5.1.0",
     "numpy>=1.25.0",
     "shapely>=2.0.2",
-]
-
-[project.optional-dependencies]
-verification = []  # deps moved; maintain extra for compatibility
-all = []  # deps moved; maintain extra for compatibility
-
-[dependency-groups]
-test = [
     "nox>=2024.3.2",
-]
-doc = [
-    "sphinx>=7.2.6,<9",  # v9 broke some autodoc features
+    "sphinx>=7.2.6,<9",
     "numpydoc>=1.7.0",
     "sphinx-rtd-theme>=2.0.0",
     "sphinxcontrib-autoprogram>=0.1.9",
-]
-xsdtypes-generation = [
     "xmlschema>=4.0.1",
-]
-dev-lint = [
     "ruff>=0.3.0",
     "mypy>=1.8.0",
-]
-dev-test = [
     "aiohttp>=3.11",
     "pytest>=7.4.4",
     "smart_open[http]>=7.1.0",
     "scipy>=1.12.0",
 ]
-dev = [
-    {include-group = "dev-lint"},
-    {include-group = "dev-test"},
-]
-
-[project.scripts]
-cphdcheck = "sarkit.verification._cphdcheck:main"
-crsdcheck = "sarkit.verification._crsdcheck:main"
-sicdcheck = "sarkit.verification._sicdcheck:main"
-siddcheck = "sarkit.verification._siddcheck:main"
-cphdinfo = "sarkit.cphd._cphdinfo:main"
-crsdinfo = "sarkit.crsd._crsdinfo:main"
-sicdinfo = "sarkit.sicd._sicdinfo:main"
-siddinfo = "sarkit.sidd._siddinfo:main"
 
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
-[tool.pdm.version]
-source = "scm"
-write_to = "sarkit/_version.py"
-write_template = "__version__ = '{}'"
-
 [tool.pdm]
 distribution = true
-
-[tool.ruff.lint]
-select = [
-    "B015",  # useless-comparison
-    "B018",  # useless-expression
-    "E4",  # pycodestyle Import
-    "E7",  # pycodestyle Statement
-    "E9",  # pycodestyle Runtime
-    "F",   # pyflakes
-    "I",  # isort
-    "N",  # pep8-naming
-    "NPY",  # NumPy-specific
-    "ISC", # flake8-implicit-str-concat
-    "RUF022", # unsorted-dunder-all
-]
-preview = true
-
-[[tool.mypy.overrides]]
-module = [
-    "lxml.*",
-    "numba.*",
-    "shapely.*",
-    "smart_open.*",
-]
-ignore_missing_imports = true
-
-[project.urls]
-Documentation = "https://sarkit.readthedocs.io/"
-Repository = "https://github.com/ValkyrieSystems/sarkit.git"
-"Bug Tracker" = "https://github.com/ValkyrieSystems/sarkit/issues"
-Changelog = "https://github.com/ValkyrieSystems/sarkit/blob/main/CHANGELOG.md"
