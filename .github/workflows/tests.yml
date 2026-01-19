@@ -23,6 +23,7 @@ jobs:
       uses: pdm-project/setup-pdm@v4
       with:
         python-version: 3.14
+        version: 2.26.2
     - name: Dump setup context
       env:
         STEPS_CONTEXT: ${{ toJson(steps.setup.outputs) }}
